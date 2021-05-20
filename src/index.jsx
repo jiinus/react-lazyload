@@ -217,6 +217,7 @@ let delayType;
 let finalLazyLoadHandler = null;
 
 const isString = string => typeof string === 'string';
+const isDOM = el => el instanceof Element;
 
 class LazyLoad extends Component {
   constructor(props) {
@@ -234,6 +235,8 @@ class LazyLoad extends Component {
     if (scrollContainer) {
       if (isString(scrollContainer)) {
         scrollport = scrollport.document.querySelector(scrollContainer);
+      } else if (isDOM(scrollContainer)) {
+        scrollport = scrollContainer;
       }
     }
     const needResetFinalLazyLoadHandler =
